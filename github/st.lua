@@ -1,4 +1,16 @@
+local quotes = dofile("l/github/quotes.lua")
+
 local coolf = ("").format
+
+math.randomseed(os.time())
+
+local function fquotes()
+    if #quotes == 0 then
+        return "Нет цитат."
+    end
+
+    return quotes[math.random(#quotes)]
+end
 
 local function terminal(command)
     if command ~= nil then
@@ -22,14 +34,17 @@ local function popen(command)
 Программа           Слова
 bastet              тетрис, стратегические игры, логика, развлечение
 baobab              очистка, управление, файловая система, сервисы для каталогизации
-cmus                музыка, аудиоплеер, воспроизведение, плейлисты, поддержка форматов
+cmus / rhythmbox                музыка, аудиоплеер, воспроизведение, плейлисты, поддержка форматов
 catimg / chafa      вывод картинки на экран терминала, ASCII, графика, отображение изображений
 cmatrix             матрица, визуализация, экранная заставка, анимация
 di                  диск, файловая система, управление дисками, информация о хранилище
 dosbox              архитектура, эмуляция, винтажные игры, старые программы, DOS
-eog                 фото, просмотр изображений, поддержка форматов, редактор
+eog / ristretto                фото, просмотр изображений, поддержка форматов, редактор
 exa                 содержимое, файловая система, альтернативная команда ls, интеграция с Git
-        ]]
+nyancat             котик, анимация, картинка, отображение, pixel-art, команда
+rocs                графы, математика, анализ, отображение, логика, эмуляция, информация
+tty-clock           часы, время, минимализм, терминал, визуализация, спокойствие
+]]
     end
 end
 
@@ -103,9 +118,15 @@ local function popen_with_gray_column()
             end
         end
     end
-    
+
     return table.concat(result_lines, "\n")
 end
 
 XY(25, 1, popen_with_gray_column())
-XY(0, 13, fortune())
+
+terminal "echo"
+
+print(fquotes())
+
+-- XY(0, 13, fortune())
+-- xarclock -north -digital -update 1 -bg green
